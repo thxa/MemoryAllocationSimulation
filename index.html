@@ -1,0 +1,202 @@
+<html>
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"></>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+        
+    <div class="container">
+  
+        <div class="sidebar">
+          <div class="title">
+            IT154-1L/EM01 Project
+          </div>
+          <div id="processes-list">
+          </div>
+          <div id="add-process-btn"
+               onclick="openModal()">
+            <i class="fas fa-plus"></i>
+            Create processes
+          </div>
+        </div>
+        
+        <div class="main-content">
+          
+          <div class="header">
+            <div class="controls">
+              
+              <div id="run-sim-btn"
+                   class="controls__run-sim"
+                   onclick="runSim()">
+                <i class="fas fa-play"></i>
+                Run
+              </div>
+      
+              <div id="next-frame-btn"
+                   class="controls__run-sim"
+                   onclick="frame()">
+                <i class="fas fa-fast-forward"></i>
+                Next
+              </div>
+      
+              <div class="controls__algorithms">
+                <i class="fas fa-calculator"></i>
+                <select name="algorithms"
+                        id="algorithms"
+                        onChange="reset()">
+                  <option value="first-fit">First-fit</option>
+                  <option value="best-fit">Best-fit</option>
+                  <option value="worst-fit">Worst-fit</option>
+                </select>
+              </div>
+
+              <div class="controls__memory-size">
+                <i class="fas fa-memory"></i>
+                <select name="total-memory-size"
+                        id="total-memory-size"
+                        onChange="reset()">
+                  <option value="256">256kB</option>
+                  <option value="512">512kB</option>
+                  <option value="1024">1GB</option>
+                  <option value="2048">2GB</option>
+                </select>
+              </div>
+      
+              <div class="controls__memory-size">
+                <i class="fas fa-memory"></i>
+                <select name="memory-size"
+                        id="num-of-blocks"
+                        onChange="reset()">
+                  <option value="2">2 blocks</option>
+                  <option value="3">3 blocks</option>
+                  <option value="4">4 blocks</option>
+                  <option value="5">5 blocks</option>
+                  <option value="6">6 blocks</option>
+                  <option value="7">7 blocks</option>
+                  <option value="8">8 blocks</option>
+                </select>
+              </div>
+      
+              <div class="controls__compaction"
+                  onclick="compaction()">Compaction</div>
+              <div class="controls__coalesce"
+                  onclick="coalesce()">Coalesce</div>
+            </div> <!-- END controls -->
+          </div>
+        
+          <div class="content">
+            
+            <div class="left-side">
+              
+              <div id="current-process">
+                <div class="header">
+                  <div>
+                      Process Log
+                  </div>
+                  <div class="state-container">
+                    Cycle:
+                    <span id="cycle-count">0</span>
+                  </div>
+                </div>
+                <div id="current-process-info">
+                  Not running
+                </div>
+              </div>
+              
+              <div id="status">
+                <div class="header">
+                  <div>
+                    <span class="green">
+                        Queued
+                    </span> Processes
+                  </div>
+                </div>
+                <div id="active-processes">
+                </div>
+              </div>
+            </div>
+            
+            <div id="memory">
+              <div class="header">
+                Memory Allocation Simulation
+                <span class="state-container">Status: 
+                  <span id="state" class="inactive">Not running</span>
+                </span>
+              </div>
+              <div id="active-memory">
+              </div>
+            </div>
+          </div>
+          
+        </div> <!-- END main-content -->
+
+        <!-- Create processes modal -->
+        <div id="create-processes-modal">
+          <div class="modal-header">
+              <div class="modal-title">
+                  Create Processes
+              </div>
+              <div class="modal-close-btn"
+                  onclick="closeModal()">x</div>
+          </div>
+          <div class="modal-body">
+            <div class="modal-container">
+                <div class="form-control">
+                  <label for="number-of-processes">
+                    Number of processes 
+                    <input id="number-of-processes"
+                          name="number-of-processes"
+                          type="text"
+                          value="1"
+                          onfocus="var temp_value=this.value; this.value=''; this.value=temp_value"
+                          oninput="validate(this)">
+                  </label>
+                  <div class="button"
+                    onclick="createRandomProcesses()">
+                    Create Random
+                  </div>
+                  <div class="button button--create"
+                    onclick="createProcesses()">
+                    Create
+                  </div>
+                </div>
+
+                <div id="process-forms-container">
+                  <div id="fid-1" class="process-form">
+                    <div class="form-input-container">
+                      <label for="process-size">
+                        Size (in kB)
+                      </label>
+                      <input id="process-size"
+                            name="process-size"
+                            type="text"
+                            value="15"
+                            onfocus="var temp_value=this.value; this.value=''; this.value=temp_value"
+                            oninput="validate(this)"/>
+                    </div>
+
+                    <div class="form-input-container">
+                      <label for="number-of-cycles">
+                        Cycles
+                      </label>
+                      <input id="number-of-cycles"
+                            name="number-of-cycles"
+                            type="text"
+                            value="12"
+                            onfocus="var temp_value=this.value; this.value=''; this.value=temp_value"
+                            oninput="validate(this)"/>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- END Create processes modal -->
+        
+      </div>
+      <script type="text/javascript" src="script.js"></script>
+    </body>
+</html>
